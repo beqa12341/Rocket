@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraSc : MonoBehaviour
 {
 
-    RocketShip ship;
+    [SerializeField] RocketShip ship;
     [SerializeField] float locationY = 5;
     [SerializeField] float cameraTimeDelay;
 

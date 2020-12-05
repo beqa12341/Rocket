@@ -1,32 +1,30 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RocketShip : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    Rigidbody rigidBody;
+
     void Start()
     {
-        
+        rigidBody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Vector3 rocket = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-
-        ProcessInput(rocket);
-
+        ProcessInput();
     }
-
-    private static void ProcessInput(Vector3 rocket)
+    private void ProcessInput()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            rocket.y += 1;
+            rigidBody.AddRelativeForce(Vector3.up);
         }
 
-        if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A))
         {
             print("Left");
         }

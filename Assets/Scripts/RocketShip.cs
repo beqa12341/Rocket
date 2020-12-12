@@ -2,13 +2,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RocketShip : MonoBehaviour
 {
     [SerializeField] float turning = 20;
     [Range(0,5)][SerializeField] float speed = 1;
+
     Rigidbody rigidBody;
     AudioSource audioSource;
+
+    enum State
+    {
+        Alive, Dying, Transcending
+    }
+
+    State state = State.Alive;
 
     void Start()
     {
@@ -23,24 +32,42 @@ public class RocketShip : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if(state != State.Alive) { return; }
+
         switch(collision.gameObject.tag)
         {
             case "Friendly":
                 Debug.Log("Friendly");
                 break;
-            case "Fuel":
-                Debug.Log("Fuel");
+            case "Finish":
+                state = State.Transcending;
+                Invoke("LoadNextScene", 1f);
                 break;
             default:
-                Debug.Log("Dead");
+                print("Dead");
+                state = State.Dying;
+                Invoke("LoadCurrentScene", 1f);
                 break;
         }
     }
 
+    private void LoadCurrentScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void LoadNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     private void ProcessInput()
     {
-        Thrust();
-        Rotate();
+        if(state==State.Alive)
+        {
+            Thrust();
+            Rotate();
+        }
     }
 
     private void Thrust()
@@ -50,7 +77,7 @@ public class RocketShip : MonoBehaviour
 
             rigidBody.AddRelativeForce(Vector3.up * Time.deltaTime*speed);
 
-            if (!audioSource.isPlaying)
+            if (!audioSource.isPlaying )
             {
                 audioSource.Play();
             }

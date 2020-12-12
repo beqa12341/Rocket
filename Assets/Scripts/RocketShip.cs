@@ -6,6 +6,7 @@ using UnityEngine;
 public class RocketShip : MonoBehaviour
 {
     [SerializeField] float turning = 20;
+    [Range(0,5)][SerializeField] float speed = 1;
     Rigidbody rigidBody;
     AudioSource audioSource;
 
@@ -20,7 +21,21 @@ public class RocketShip : MonoBehaviour
         ProcessInput();
     }
 
-
+    void OnCollisionEnter(Collision collision)
+    {
+        switch(collision.gameObject.tag)
+        {
+            case "Friendly":
+                Debug.Log("Friendly");
+                break;
+            case "Fuel":
+                Debug.Log("Fuel");
+                break;
+            default:
+                Debug.Log("Dead");
+                break;
+        }
+    }
 
     private void ProcessInput()
     {
@@ -33,7 +48,7 @@ public class RocketShip : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
 
-            rigidBody.AddRelativeForce(Vector3.up * Time.deltaTime);
+            rigidBody.AddRelativeForce(Vector3.up * Time.deltaTime*speed);
 
             if (!audioSource.isPlaying)
             {

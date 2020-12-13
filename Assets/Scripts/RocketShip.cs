@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class RocketShip : MonoBehaviour
 {
-    [SerializeField] float turning = 20;
+    [Range(0,10)][SerializeField] float turning = 1;
     [Range(0,5)][SerializeField] float speed = 1;
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip death;
@@ -16,6 +16,8 @@ public class RocketShip : MonoBehaviour
     [SerializeField] ParticleSystem mainEngineParticles;
     [SerializeField] ParticleSystem successParticles;
     [SerializeField] ParticleSystem deathParticles;
+
+
 
 
     Rigidbody rigidBody;
@@ -132,14 +134,14 @@ public class RocketShip : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            rigidBody.AddTorque(transform.forward*Time.deltaTime/turning);
+            rigidBody.AddTorque(transform.forward*Time.deltaTime*turning/10);
             
             //transform.Rotate(100 * Vector3.forward * Time.deltaTime);
         }
 
         else if (Input.GetKey(KeyCode.D))
         {
-            rigidBody.AddTorque(-transform.forward*Time.deltaTime/turning);
+            rigidBody.AddTorque(-transform.forward*Time.deltaTime*turning/10);
 
             //transform.Rotate(-100 * Vector3.forward * Time.deltaTime);
 

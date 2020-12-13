@@ -450,7 +450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementVector: {x: 7.6, y: 0, z: 0}
-  speed: 2
+  period: 1
 --- !u!4 &627856913 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5362589649334377214, guid: 045f4d68f4d81914eaa35a36aaf20d21,
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe8e4b5494b7224a9be548fa264ebeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 20
 --- !u!114 &1688272331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,7 +677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementVector: {x: 10, y: 0, z: 0}
-  speed: 2
+  period: 2
 --- !u!1 &1763181781
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +971,7 @@ PrefabInstance:
     - target: {fileID: 5362589649334377214, guid: 045f4d68f4d81914eaa35a36aaf20d21,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.01
+      value: 18.9
       objectReference: {fileID: 0}
     - target: {fileID: 5362589649334377214, guid: 045f4d68f4d81914eaa35a36aaf20d21,
         type: 3}

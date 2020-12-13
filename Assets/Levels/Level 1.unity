@@ -207,6 +207,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 880984410, guid: cc52cf633b876fd4fae5b0b10f7818d5, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.73
+      objectReference: {fileID: 0}
     - target: {fileID: 1602267372059295083, guid: cc52cf633b876fd4fae5b0b10f7818d5,
         type: 3}
       propertyPath: m_Name
@@ -660,6 +664,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+--- !u!114 &1688272331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688272326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49fae1f7a0499fd469a7ec830990eec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementVector: {x: 10, y: 0, z: 0}
+  speed: 2
 --- !u!1 &1763181781
 GameObject:
   m_ObjectHideFlags: 0

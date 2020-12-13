@@ -13,6 +13,11 @@ public class RocketShip : MonoBehaviour
     [SerializeField] AudioClip success;
 
 
+    [SerializeField] ParticleSystem mainEngineParticles;
+    [SerializeField] ParticleSystem successParticles;
+    [SerializeField] ParticleSystem deathParticles;
+
+
     Rigidbody rigidBody;
     AudioSource audioSource;
 
@@ -53,20 +58,23 @@ public class RocketShip : MonoBehaviour
         }
     }
 
-    private void StartDeathSequence()
-    {
-        state = State.Dying;
-        audioSource.Stop();
-        audioSource.PlayOneShot(death);
-        Invoke("LoadCurrentScene", 1f);
-    }
 
     private void StartSuccessSequence()
     {
         state = State.Transcending;
         audioSource.Stop();
+        successParticles.Play();
         audioSource.PlayOneShot(success);
         Invoke("LoadNextScene", 1f);
+    }
+   
+    private void StartDeathSequence()
+    {
+        state = State.Dying;
+        audioSource.Stop();
+        deathParticles.Play();
+        audioSource.PlayOneShot(death);
+        Invoke("LoadCurrentScene", 1f);
     }
 
     private void LoadCurrentScene()
@@ -94,18 +102,26 @@ public class RocketShip : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
+            ApplyThrust();
 
-            rigidBody.AddRelativeForce(Vector3.up * Time.deltaTime*speed);
-
-            if (!audioSource.isPlaying )
-            {
-                audioSource.PlayOneShot(mainEngine);
-            }
         }
 
         else
         {
             audioSource.Stop();
+            mainEngineParticles.Stop();
+
+        }
+    }
+
+    private void ApplyThrust()
+    {
+        rigidBody.AddRelativeForce(Vector3.up * Time.deltaTime * speed);
+        mainEngineParticles.Play();
+
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(mainEngine);
         }
     }
 

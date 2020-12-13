@@ -96,5 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53131ecc63db1344d8db70f47700507e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ship: {fileID: 0}
   locationY: 9.35
   cameraTimeDelay: 0.54

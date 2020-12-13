@@ -208,9 +208,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 880984412, guid: cc52cf633b876fd4fae5b0b10f7818d5, type: 3}
-      propertyPath: speed
-      value: 1.49
-      objectReference: {fileID: 0}
+      propertyPath: death
+      value: 
+      objectReference: {fileID: 8300000, guid: 7fa6287b14f160547840a5948c17e814, type: 3}
+    - target: {fileID: 880984412, guid: cc52cf633b876fd4fae5b0b10f7818d5, type: 3}
+      propertyPath: success
+      value: 
+      objectReference: {fileID: 8300000, guid: 0774100fe3663e144a7f3790eb19866f, type: 3}
     - target: {fileID: 1602267372059295083, guid: cc52cf633b876fd4fae5b0b10f7818d5,
         type: 3}
       propertyPath: m_Name

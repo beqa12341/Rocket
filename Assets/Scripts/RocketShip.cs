@@ -8,6 +8,10 @@ public class RocketShip : MonoBehaviour
 {
     [SerializeField] float turning = 20;
     [Range(0,5)][SerializeField] float speed = 1;
+    [SerializeField] AudioClip mainEngine;
+    [SerializeField] AudioClip death;
+    [SerializeField] AudioClip success;
+
 
     Rigidbody rigidBody;
     AudioSource audioSource;
@@ -23,6 +27,7 @@ public class RocketShip : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+
     }
 
     void Update()
@@ -40,37 +45,52 @@ public class RocketShip : MonoBehaviour
                 Debug.Log("Friendly");
                 break;
             case "Finish":
-                state = State.Transcending;
-                Invoke("LoadNextScene", 1f);
+                StartSuccessSequence();
                 break;
             default:
-                print("Dead");
-                state = State.Dying;
-                Invoke("LoadCurrentScene", 1f);
+                StartDeathSequence();
                 break;
         }
+    }
+
+    private void StartDeathSequence()
+    {
+        state = State.Dying;
+        audioSource.Stop();
+        audioSource.PlayOneShot(death);
+        Invoke("LoadCurrentScene", 1f);
+    }
+
+    private void StartSuccessSequence()
+    {
+        state = State.Transcending;
+        audioSource.Stop();
+        audioSource.PlayOneShot(success);
+        Invoke("LoadNextScene", 1f);
     }
 
     private void LoadCurrentScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 
     private void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
     }
 
     private void ProcessInput()
     {
         if(state==State.Alive)
         {
-            Thrust();
-            Rotate();
+            RespondToThrustInput();
+            RespondToRotateInput();
         }
     }
 
-    private void Thrust()
+    private void RespondToThrustInput()
     {
         if (Input.GetKey(KeyCode.Space))
         {
@@ -79,7 +99,7 @@ public class RocketShip : MonoBehaviour
 
             if (!audioSource.isPlaying )
             {
-                audioSource.Play();
+                audioSource.PlayOneShot(mainEngine);
             }
         }
 
@@ -89,7 +109,7 @@ public class RocketShip : MonoBehaviour
         }
     }
 
-    private void Rotate()
+    private void RespondToRotateInput()
     {
         //rigidBody.freezeRotation = true;
 
